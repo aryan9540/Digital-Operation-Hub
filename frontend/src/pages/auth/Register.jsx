@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
-import { Sparkles, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { Sparkles, Mail, Lock, User, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 export const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { register } = useAuth();
@@ -80,7 +81,7 @@ export const Register = () => {
             <div>
               <label className="form-label" htmlFor="reg-name">Full Name</label>
               <div style={{ position: 'relative', marginTop: '5px' }}>
-                <User size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                <User size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                 <input
                   id="reg-name"
                   type="text"
@@ -89,6 +90,7 @@ export const Register = () => {
                   style={{ paddingLeft: '34px' }}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  autoComplete="name"
                   required
                   autoFocus
                 />
@@ -98,7 +100,7 @@ export const Register = () => {
             <div>
               <label className="form-label" htmlFor="reg-email">Work Email</label>
               <div style={{ position: 'relative', marginTop: '5px' }}>
-                <Mail size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                <Mail size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                 <input
                   id="reg-email"
                   type="email"
@@ -107,6 +109,7 @@ export const Register = () => {
                   style={{ paddingLeft: '34px' }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
                   required
                 />
               </div>
@@ -115,17 +118,40 @@ export const Register = () => {
             <div>
               <label className="form-label" htmlFor="reg-pwd">Password</label>
               <div style={{ position: 'relative', marginTop: '5px' }}>
-                <Lock size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                <Lock size={14} style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                 <input
                   id="reg-pwd"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   className="form-control"
                   placeholder="Minimum 6 characters"
-                  style={{ paddingLeft: '34px' }}
+                  style={{ paddingLeft: '34px', paddingRight: '36px' }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    padding: '4px',
+                    cursor: 'pointer',
+                    color: 'var(--text-muted)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
               </div>
             </div>
 

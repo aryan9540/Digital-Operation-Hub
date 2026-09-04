@@ -326,7 +326,7 @@ export const Settings = () => {
               <input
                 type="password"
                 className="form-control"
-                placeholder="••••••••"
+                placeholder="Enter current password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
@@ -350,7 +350,7 @@ export const Settings = () => {
               <input
                 type="password"
                 className="form-control"
-                placeholder="••••••••"
+                placeholder="Confirm new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
